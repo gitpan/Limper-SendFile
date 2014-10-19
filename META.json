@@ -27,20 +27,15 @@
       },
       "runtime" : {
          "requires" : {
-            "File::Slurp" : "0",
-            "JSON" : "0",
-            "Limper" : "0",
-            "Time::Local" : "0",
-            "base" : "0",
+            "Limper" : "0.008",
             "perl" : "v5.10.0",
             "strict" : "0",
             "warnings" : "0"
          }
       },
       "test" : {
-         "requires" : {
-            "Net::HTTP::Client" : "0",
-            "POSIX" : "0",
+         "recommends" : {
+            "Net::HTTP::Client" : "0.011",
             "Test::More" : "0"
          }
       }
@@ -48,11 +43,11 @@
    "provides" : {
       "Limper" : {
          "file" : "lib/Limper/SendFile.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       },
       "Limper::SendFile" : {
          "file" : "lib/Limper/SendFile.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
@@ -63,6 +58,6 @@
          "web" : "https://gitable.org/ashley/limper-sendfile.git"
       }
    },
-   "version" : "0.001"
+   "version" : "0.002"
 }
 

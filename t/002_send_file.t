@@ -1,4 +1,4 @@
-use Test::More tests => 16;
+use Test::More tests => 19;
 use Limper::SendFile;
 use Limper;
 use POSIX qw(setsid);
@@ -54,7 +54,7 @@ SKIP: {
 
         $res = Net::HTTP::Client->request(GET => "$uri");
         is $res->status_line, '200 OK', 'Directory listing status';
-        is $res->content, "<html><head><title>Directory listing of /</title></head><body>\n<a href=\"foo.txt\">foo.txt</a><br>\n</body></html>", 'Directory listing body';
+        is $res->content, "<html><head><title>Directory listing of /</title></head><body>\n<a href=\"ampersand.eps\">ampersand.eps</a><br>\n<a href=\"foo.txt\">foo.txt</a><br>\n</body></html>", 'Directory listing body';
         is $res->header('Content-Type'), 'text/html', 'Content-Type: text/html';
 
         $res = Net::HTTP::Client->request(GET => "$uri/foo.txt");
@@ -72,6 +72,11 @@ SKIP: {
         is $res->status_line, '412 Precondition Failed', '412 status';
         is $res->content, '', '412 body';
         is $res->header('Content-Type'), 'text/plain', 'Content-Type: text/plain';
+
+        $res = Net::HTTP::Client->request(GET => "$uri/ampersand.eps");
+        is $res->status_line, '200 OK', 'ps status';
+        is $res->content, "%!PS-Adobe-3.0 EPSF-3.0\n%%BoundingBox: 0 0 200 200\n\n/Helvetica findfont 200 scalefont setfont\n0 28 moveto (@) show\nshowpage\n", 'ps body';
+        is $res->header('Content-Type'), 'application/postscript', 'Content-Type: application/postscript';
 
         kill -9, $pid;
     }

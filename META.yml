@@ -2,10 +2,7 @@
 abstract: 'add static content support to Limper'
 author:
   - 'Ashley Willis <ashley+perl@gitable.org>'
-build_requires:
-  Net::HTTP::Client: 0
-  POSIX: 0
-  Test::More: 0
+build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 0
 dynamic_config: 0
@@ -18,19 +15,15 @@ name: Limper-SendFile
 provides:
   Limper:
     file: lib/Limper/SendFile.pm
-    version: 0.001
+    version: 0.002
   Limper::SendFile:
     file: lib/Limper/SendFile.pm
-    version: 0.001
+    version: 0.002
 requires:
-  File::Slurp: 0
-  JSON: 0
-  Limper: 0
-  Time::Local: 0
-  base: 0
+  Limper: 0.008
   perl: v5.10.0
   strict: 0
   warnings: 0
 resources:
   repository: https://gitable.org/ashley/limper-sendfile.git
-version: 0.001
+version: 0.002

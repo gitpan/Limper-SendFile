@@ -20,20 +20,11 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Limper::SendFile",
   "PREREQ_PM" => {
-    "File::Slurp" => 0,
-    "JSON" => 0,
-    "Limper" => 0,
-    "Time::Local" => 0,
-    "base" => 0,
+    "Limper" => "0.008",
     "strict" => 0,
     "warnings" => 0
   },
-  "TEST_REQUIRES" => {
-    "Net::HTTP::Client" => 0,
-    "POSIX" => 0,
-    "Test::More" => 0
-  },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -41,14 +32,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "File::Slurp" => 0,
-  "JSON" => 0,
-  "Limper" => 0,
-  "Net::HTTP::Client" => 0,
-  "POSIX" => 0,
-  "Test::More" => 0,
-  "Time::Local" => 0,
-  "base" => 0,
+  "Limper" => "0.008",
   "strict" => 0,
   "warnings" => 0
 );

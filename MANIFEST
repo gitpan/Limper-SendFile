@@ -10,6 +10,7 @@ dist.ini
 lib/Limper/SendFile.pm
 t/001_base.t
 t/002_send_file.t
+t/foo/ampersand.eps
 t/foo/foo.txt
 t/release-kwalitee.t
 t/release-pod-coverage.t
