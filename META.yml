@@ -15,10 +15,10 @@ name: Limper-SendFile
 provides:
   Limper:
     file: lib/Limper/SendFile.pm
-    version: 0.002
+    version: 0.003
   Limper::SendFile:
     file: lib/Limper/SendFile.pm
-    version: 0.002
+    version: 0.003
 requires:
   Limper: 0.008
   perl: v5.10.0
@@ -26,4 +26,4 @@ requires:
   warnings: 0
 resources:
   repository: https://gitable.org/ashley/limper-sendfile.git
-version: 0.002
+version: 0.003

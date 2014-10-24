@@ -1,12 +1,12 @@
 package Limper::SendFile;
-$Limper::SendFile::VERSION = '0.002';
+$Limper::SendFile::VERSION = '0.003';
 use base 'Limper';
 use 5.10.0;
 use strict;
 use warnings;
 
 package Limper;
-$Limper::VERSION = '0.002';
+$Limper::VERSION = '0.003';
 use Time::Local 'timegm';
 
 push @Limper::EXPORT, qw/public send_file/;
@@ -88,7 +88,7 @@ Limper::SendFile - add static content support to Limper
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -106,7 +106,7 @@ version 0.002
 
 =head1 DESCRIPTION
 
-C<Limper::SendFile> extends C<Limper> to also return actual files. Because sometimes that's needed.
+B<Limper::SendFile> extends L<Limper> to also return actual files. Because sometimes that's needed.
 
 =head1 EXPORTS
 
@@ -124,7 +124,7 @@ Also exportable:
 
 Sends either the file name given, or the value of C<< request->{uri} >> if no file name given.
 
-The following as the last defined route will have C<Limper> look for the file as a last resort:
+The following as the last defined route will have B<Limper> look for the file as a last resort:
 
   get qr{^/} => sub { send_file }
 
@@ -133,7 +133,7 @@ Default is B<text/plain>.
 
 =head2 public
 
-Get or set the public root directory. Default is C<./public/>.
+Get or set the public root directory. Default is B<./public/>.
 
   my $public = public;
 
@@ -152,14 +152,14 @@ Liberally parses whatever date a client might give, returning a Unix timestamp.
 
 =head2 mime_types
 
-Returns a C<HASH> of file extension / content-type pairs.
+Returns a B<HASH> of file extension / content-type pairs.
 
 =head1 HOOKS
 
 =head2 after
 
 An B<after> hook is created to support B<If-Modified-Since> and B<If-Unmodified-Since>, comparing to B<Last-Modified>.
-This runs for all defined routes, not just those using C<send_file>.
+This runs for all defined routes, not just those using B<send_file>.
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -172,6 +172,10 @@ at your option, any later version of Perl 5 you may have available.
 =head1 SEE ALSO
 
 L<Limper>
+
+L<Limper::Engine::PSGI>
+
+L<Limper::SendJSON>
 
 =cut
 

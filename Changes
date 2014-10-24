@@ -1,5 +1,9 @@
 Revision history for Limper-SendFile
 
+0.003     2014-10-24 02:30:02+00:00 UTC
+- fix test skipping
+- skip tests if MSWin32
+
 0.002     2014-10-19 06:13:37+00:00 UTC
 - add support for 79 mime types (103 file extensions)
 - don't set Content-Type if already set
