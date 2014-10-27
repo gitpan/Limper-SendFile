@@ -13,17 +13,14 @@ meta-spec:
   version: 1.4
 name: Limper-SendFile
 provides:
-  Limper:
-    file: lib/Limper/SendFile.pm
-    version: 0.003
   Limper::SendFile:
     file: lib/Limper/SendFile.pm
-    version: 0.003
+    version: 0.004
 requires:
-  Limper: 0.008
+  Limper: 0.012
   perl: v5.10.0
   strict: 0
   warnings: 0
 resources:
   repository: https://gitable.org/ashley/limper-sendfile.git
-version: 0.003
+version: 0.004

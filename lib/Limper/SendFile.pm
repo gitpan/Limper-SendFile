@@ -1,12 +1,13 @@
 package Limper::SendFile;
-$Limper::SendFile::VERSION = '0.003';
+$Limper::SendFile::VERSION = '0.004';
 use base 'Limper';
 use 5.10.0;
 use strict;
 use warnings;
 
-package Limper;
-$Limper::VERSION = '0.003';
+package		# newline because Dist::Zilla::Plugin::PkgVersion and PAUSE indexer
+  Limper;
+
 use Time::Local 'timegm';
 
 push @Limper::EXPORT, qw/public send_file/;
@@ -34,11 +35,10 @@ sub parse_date {
 # support If-Modified-Since and If-Unmodified-Since
 hook after => sub {
     my ($request, $response) = @_;
-    if ($request->{method} // '' eq 'GET' and substr($response->{status} // 200, 0, 1) == 2 and
-            my ($lm) = grep { lc $_ eq 'last-modified' } @{$response->{headers}}) {
-        for my $since (grep { /if-(?:un)?modified-since/ } keys %{$request->{hheaders}}) {
+    if ($request->{method} // '' eq 'GET' and substr($response->{status} // 200, 0, 1) == 2 and exists $response->{headers}{'Last-Modified'}) {
+        for my $since (grep { /if-(?:un)?modified-since/ } keys %{$request->{headers}}) {
             next if $since eq 'if-modified-since' and ($response->{status} // 200) != 200;
-            if (parse_date($request->{hheaders}{$since}) >= parse_date({@{$response->{headers}}}->{$lm})) {
+            if (parse_date($request->{headers}{$since}) >= parse_date($response->{headers}{'Last-Modified'})) {
                 $response->{body} = '';
                 $response->{status} = $since eq 'if-modified-since' ? 304 : 412;
             }
@@ -56,11 +56,11 @@ sub send_file {
     }
     if (-e $file and -r $file) {
         if (-f $file) {
-            if (!grep { $_ eq 'Content-Type' } keys %{{&headers}} and my ($ext) = $file =~ /\.(\w+)$/) {
-                headers 'Content-Type' => $mime_types{$ext}, headers if exists $mime_types{$ext};
+            if (!exists response->{headers}{'Content-Type'} and my ($ext) = $file =~ /\.(\w+)$/) {
+                headers 'Content-Type' => $mime_types{$ext} if exists $mime_types{$ext};
             }
             open my $fh, '<', $file;
-            headers 'Last-Modified' => rfc1123date((stat($fh))[9]), headers;
+            headers 'Last-Modified' => rfc1123date((stat($fh))[9]);
             join '', map { $_ } (<$fh>);
         } elsif (-d $file) {
             opendir(my $dh, $file);
@@ -88,7 +88,7 @@ Limper::SendFile - add static content support to Limper
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
